@@ -7,9 +7,9 @@ app = FastAPI()
 @app.get("/lista-ordenada")
 def get_ordered_list(lista_no_ordenada: str):
     """
-    Endpoint para ordenar la lista de números.
+    Endpoint para ordenar la lista de numeros.
 
-    Parámnetro: lista_no_ordenada (str): Lista de números a ordenar.
+    Paramnetro: lista_no_ordenada (str): Lista de números a ordenar.
     """
     # Retorna ordenada la lista recibida por parámetro
     lista_ordenada = sorted([int(x) for x in lista_no_ordenada.strip("[]").split(",")])
