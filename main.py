@@ -5,14 +5,27 @@ app = FastAPI()
 
 
 @app.get("/lista-ordenada")
-async def get_ordered_list(lista_no_ordenada: str):
-    ordered_list = sorted([x for x in lista_no_ordenada if x.isdigit()])
+def get_ordered_list(lista_no_ordenada: str):
+    """
+    Endpoint para ordenar la lista de números.
+
+    Parámnetro: lista_no_ordenada (str): Lista de números a ordenar.
+    """
+    # Retorna ordenada la lista recibida por parámetro
+    lista_ordenada = sorted([int(x) for x in lista_no_ordenada.strip("[]").split(",")])
+    # Retorna la hora actual formateada ("HHh:MM:SS")
     tiempo = datetime.now().strftime("%Hh:%M:%S")
-    return {
-                "system_time": tiempo,
-                "ordered_list": ordered_list,
+    # Crea un formato JSON para la respuesta del Endpoint
+    respuesta = {
+                "hora_sistema": tiempo,
+                "lista_ordenada": lista_ordenada,
             }
+    return respuesta
+
 
 @app.get("/healthcheck")
 def get_health_check():
+    """
+    Endpoint para verificar el estado del API
+    """
     return "Ok"
