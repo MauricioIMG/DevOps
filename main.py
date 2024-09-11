@@ -28,4 +28,4 @@ def get_health_check():
     """
     Endpoint para verificar el estado del API
     """
-    return "Ok"
+    return "OK"
