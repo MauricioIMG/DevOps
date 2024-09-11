@@ -1,11 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from datetime import datetime
 
 app = FastAPI()
 
 
 @app.get("/lista-ordenada")
-def get_ordered_list(lista_no_ordenada: str):
+def get_ordered_list(lista_no_ordenada: str = Query(
+...,
+        alias="lista-no-ordenada",
+        description="Cadena de texto numérica separada por comas",
+    )
+):
     """
     Endpoint para ordenar la lista de numeros.
 
