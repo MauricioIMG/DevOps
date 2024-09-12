@@ -79,3 +79,45 @@ Se presenta una guia de configuracion de proyecto y ejecucion de API:
   ```text
   OK
   ```
+  
+## Integración de MongoDB
+
+Se crea una red de MongoDb e integra al API.
+
+1. **Crear red mongodb-net**
+
+   ```Bash
+   docker network create mongodb-net
+   ```
+   
+2. **Correr el contenedor de MongoDB**
+
+   ```Bash
+   docker run -d --name mongodb --network mongodb-net -p 27017:27017 mongo:8.0.0-rc19-noble
+   ```
+    - **Descripción**: `-d` ejecuta contenedor en 2° plano, `--name mongodb` nombra el contenedor, `--network mongodb-net` asocia contenedor a red creada.   
+   
+3. **Correr el contenedor de MongoDB**
+
+   ```Bash
+   docker run -d --name python-api --network mongodb-net -p 8001:8001 python-api:v1.0.0
+   ```
+
+4. **Endpoint para probar el guardado de la lista-no-ordenada**
+   - **Endpoint**: `/guardar-lista-ordenada`
+   - **Descripción**:  Guarda una lista no ordenada en MongoDB y devuelve un
+    mensaje con un ID único.
+   - **Parámetro**: `lista-no-ordenada` de tipo str
+   - **Uso con `curl`**:
+
+     ```bash
+     curl "http://localhost:8001/guardar-lista-ordenada?lista-no-ordenada=[5,4,7,2,7,2]"
+     ```
+     
+     **Ejemplo respuesta Endpoint**:
+
+     ```json
+     {
+      "msg":"La lista no ordenada fue guardada con el id: 577a9f55-2155-4069-85d9-bb44c1841297"
+     }
+     ```
