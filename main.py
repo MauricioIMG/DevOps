@@ -38,7 +38,7 @@ def save_non_ordered_list(lista_no_ordenada: str = Query(
         "hora_sistema": tiempo
     }
 
-    # Instancia para obtener base de datos "docker_app"
+    # Instancia para obtener base de datos "python_app"
     db = get_mongo_db()
     # Coleccion dentro de mongodb para guardar registros
     coleccion = db.listas_no_ordenadas

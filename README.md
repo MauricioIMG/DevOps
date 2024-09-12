@@ -17,7 +17,7 @@ Se presenta una guia de configuracion de proyecto y ejecucion de API:
    Construir imagen docker en root de proyecto: 
 
    ```Bash
-   docker build -t docker_api:v1.0.0 .
+   docker build -t python-api:v1.0.0 .
    ```
 
 3. **Ejecutar contenedor**
@@ -25,7 +25,7 @@ Se presenta una guia de configuracion de proyecto y ejecucion de API:
    Ejecutar contenedor:
 
    ```bash
-   docker run -p 8001:8001 docker_api:v1.0.0
+   docker run -p 8001:8001 python-api:v1.0.0
    ```
 
    Accede a la API: `http://localhost:8001`.
