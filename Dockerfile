@@ -17,5 +17,5 @@ ENV MONGODB_PORT=27017
 # Define punto de entrada de aplicación, indicando a Docker qué comando ejecutar
 ENTRYPOINT ["uvicorn", "main:app"]
 
-# Configura aplicación para que se ejecute en host 0.0.0.0 y en el puerto 8000.
-CMD ["--host", "0.0.0.0", "--port", "8000"]
+# Configura aplicación para que se ejecute en host 0.0.0.0 y en el puerto 8001.
+CMD ["--host", "0.0.0.0", "--port", "8001"]

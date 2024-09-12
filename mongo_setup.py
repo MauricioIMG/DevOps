@@ -1,4 +1,4 @@
-# Librerías externas
+# librerías externas
 import os
 from functools import lru_cache
 from pymongo import MongoClient
@@ -17,14 +17,14 @@ def create_mongo_client() -> MongoClient:
 
 @lru_cache()
 def get_mongo_db() -> Database:
-    """Devuelve la base de datos 'docker_app' desde el cliente MongoDB.
+    """Devuelve la base de datos 'python_app' desde el cliente MongoDB.
 
     Returns:
-        La base de datos 'docker_app'.
+        La base de datos 'python_app'.
     """
     # Usa la función auxiliar para crear el cliente
     client = create_mongo_client()
-    # Accede a la base de datos 'docker_app'
-    mongo_db = client.docker_app
+    # Accede a la base de datos 'python_app'
+    mongo_db = client.python_app
 
     return mongo_db
