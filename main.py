@@ -10,7 +10,7 @@ def get_ordered_list(lista_no_ordenada: str = Query(
         alias="lista-no-ordenada",
         description="Cadena de texto numérica separada por comas",
     )
-):
+) -> dict:
     """
     Endpoint para ordenar la lista de numeros.
 
@@ -29,7 +29,7 @@ def get_ordered_list(lista_no_ordenada: str = Query(
 
 
 @app.get("/healthcheck")
-def get_health_check():
+def get_health_check() -> str:
     """
     Endpoint para verificar el estado del API
     """
