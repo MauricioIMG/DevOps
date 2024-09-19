@@ -111,7 +111,7 @@ Se crea una red de MongoDb e integra al API.
    - **Uso con `curl`**:
 
      ```bash
-     curl "http://localhost:8001/guardar-lista-ordenada?lista-no-ordenada=[5,4,7,2,7,2]"
+     curl "http://localhost:8001/guardar-lista-no-ordenada?lista-no-ordenada=[5,4,7,2,7,2]"
      ```
      
      **Ejemplo respuesta Endpoint**:
