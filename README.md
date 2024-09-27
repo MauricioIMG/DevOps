@@ -121,3 +121,11 @@ Se crea una red de MongoDb e integra al API.
       "msg":"La lista no ordenada fue guardada con el id: 577a9f55-2155-4069-85d9-bb44c1841297"
      }
      ```
+
+## Docker-Compose
+
+1. **Correr el proyecto**
+   ```Bash
+      docker-compose --env-file .env.demo --profile api --profile db up -d
+      ```
+       
