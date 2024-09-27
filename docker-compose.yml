@@ -44,5 +44,5 @@ networks:
     name: mongodb-net
 
 volumes:
-  mongodb_data:
+  mongodb-data:
     name: mongodb-data
