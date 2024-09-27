@@ -4,8 +4,8 @@ services:
   python-api:
     container_name: python_api # Nombre del contenedor
     build: . # Construye imagen desde Dockerfile actual
-    env_file:
-      - ./.env # Carga variables de entorno desde .env
+    #env_file:
+    #  - ./.env # Carga variables de entorno desde .env
     environment:
       - MONGODB_HOST
       - MONGODB_PORT
