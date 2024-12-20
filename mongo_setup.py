@@ -6,7 +6,8 @@ from pymongo.database import Database
 
 
 def create_mongo_client() -> MongoClient:
-    """Crea y devuelve un cliente de MongoDB usando las variables de entorno."""
+    """Crea y devuelve un cliente de MongoDB usando las variables de entorno.
+    """
     # Usa un valor por defecto si no está definido
     mongo_host = os.getenv('MONGODB_HOST')
     # Convierte el puerto a entero

@@ -16,13 +16,14 @@ def save_non_ordered_list(lista_no_ordenada: str = Query(
     )
 ) -> dict:
     """Endpoint para guardar una lista no ordenada en MongoDB y devuelve un
-    mensaje con un ID único.
+     mensaje con un ID único.
 
     Parámetro:
         lista_no_ordenada: lista_no_ordenada (str): Lista de números a ordenar.
 
     Returns:
         diccionario con mensaje con ID único de guardado de la lista.
+
     """
     # Retorna la lista recibida por parámetro
     lista_no_ordenada = [int(x) for x in lista_no_ordenada.strip("[]").split(",")]
@@ -56,12 +57,14 @@ def get_ordered_list(lista_no_ordenada: str = Query(
         description="Cadena de texto numérica separada por comas",
     )
 ) -> dict:
-    """
-    Endpoint para ordenar la lista de números.
+    """Endpoint para ordenar la lista de números.
 
-    Parámetro: lista_no_ordenada (str): Lista de números a ordenar.
+    Parámetro:
+        lista_no_ordenada (str): Lista de números a ordenar.
 
-    Returns: diccionario con lista ordenada con hora actual del sistema.
+    Returns:
+        diccionario con lista ordenada con hora actual del sistema.
+
     """
     # Retorna ordenada la lista recibida por parámetro
     lista_ordenada = sorted([int(x) for x in lista_no_ordenada.strip("[]").split(",")])
@@ -77,7 +80,6 @@ def get_ordered_list(lista_no_ordenada: str = Query(
 
 @app.get("/healthcheck")
 def get_health_check() -> str:
-    """
-    Endpoint para verificar el estado del API
+    """Endpoint para verificar el estado del API.
     """
     return "OK"
