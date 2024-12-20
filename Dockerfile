@@ -1,16 +1,20 @@
-# Usa imagen slim de Python para reducir tamaño
-FROM python:3.12.5-slim
+# Usa una imagen base específica de Python para garantizar reproducibilidad
+FROM python:3.12.5-slim-bullseye
 
-# Establece directorio de trabajo
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /opt/python-api/
 
-# Copia solo archivo dependencias (no código fuente completo)
+# Copia únicamente el archivo de dependencias primero para aprovechar la caché
+COPY requirements.txt .
+
+# Instala las dependencias del proyecto y limpia cachés para reducir el tamaño de la imagen
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia el código fuente del proyecto al contenedor
 COPY . .
 
-# Instala dependencias de proyecto para aprovechar caché
-RUN pip install -r requirements.txt
-
+# Expone el puerto 8001 para la API
 EXPOSE 8001
 
-# Configura aplicación para que se ejecute en host 0.0.0.0 y en el puerto 8001.
+# Configura el comando de inicio para ejecutar el servidor Uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
