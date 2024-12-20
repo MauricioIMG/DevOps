@@ -2,14 +2,14 @@
 FROM python:3.12-slim
 
 # Establecemos el directorio de trabajo dentro del contenedor
-WORKDIR /app
+WORKDIR /opt/python-api
 
-# Copiamos los archivos necesarios al contenedor
-COPY . .
+# Copiamos los archivos del proyecto desde el directorio python_api
+COPY . /opt/python-api/
 
-# Instalamos las dependencias
+# Instalamos las dependencias desde el archivo requirements.txt
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r /opt/python-api/requirements.txt
 
 # Exponemos el puerto 8001 para acceder a la API
 EXPOSE 8001
