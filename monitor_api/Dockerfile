@@ -1,17 +1,22 @@
+# Usamos la imagen oficial de Python como base
 FROM python:3.12-slim
 
-# Directorio trabajo dentro del contenedor
+# Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /opt/monitor
 
-# Copia código fuente y dependencias
-COPY . /opt/monitor/
+# Crear directorios necesarios (si no existen)
+RUN mkdir -p /opt/monitor/logs
 
-# Instala dependencias desde archivo requirements.txt
+# Copiamos el código fuente y el archivo requirements.txt
+COPY monitor.py /opt/monitor/monitor.py
+COPY requirements.txt /opt/monitor/requirements.txt
+
+# Instalamos las dependencias desde el archivo requirements.txt
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r /opt/monitor/requirements.txt
 
-# Establece variable entorno para zona horaria (TZ) contenedor
+# Establecemos la variable de entorno para la zona horaria (TZ) del contenedor
 ENV TZ=${TZ}
 
-# Comando para ejecutar script monitoreo
-CMD ["python", "monitor.py"]
+# Establecemos el punto de entrada para ejecutar el script de monitoreo
+CMD ["python", "/opt/monitor/monitor.py"]
