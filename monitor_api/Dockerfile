@@ -8,7 +8,7 @@ WORKDIR /opt/monitor
 RUN mkdir -p /opt/monitor/logs
 
 # Copiamos el código fuente y el archivo requirements.txt
-COPY monitor.py /opt/monitor/monitor.py
+COPY monitor_script.py /opt/monitor/monitor.py
 COPY requirements.txt /opt/monitor/requirements.txt
 
 # Instalamos las dependencias desde el archivo requirements.txt
