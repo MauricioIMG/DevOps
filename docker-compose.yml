@@ -1,8 +1,8 @@
 services:
   python-api:
-    container_name: python_api # Nombre del contenedor
+    container_name: python-api # Nombre del contenedor
     build:
-      context: ./python_api # Construye la imagen desde la carpeta python_api
+      context: ./python-api # Construye la imagen desde la carpeta python-api
     environment:
       - MONGODB_HOST=mongodb
       - MONGODB_PORT=27017
@@ -21,13 +21,12 @@ services:
     profiles:
       - api
 
-  api-monitor:
+  monitor-api:
+    container_name: monitor-api
     build:
-      context: ./api_monitor
-    container_name: api-monitor
-    image: python:3.12-slim
+      context: ./monitor-api
     volumes:
-      - ./volumes/logs:/api-monitor/logs/api-monitor.log
+      - ./volumes/logs:/opt/monitor/logs
     environment:
       - TARGET_CONTAINER_HOST=python-api
       - TARGET_CONTAINER_PORT=8001
@@ -39,7 +38,7 @@ services:
       - python-api
     restart: always
     profiles:
-      - monitor
+      - monitor-api
 
   mongodb:
     container_name: mongodb

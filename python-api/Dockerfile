@@ -4,7 +4,7 @@ FROM python:3.12-slim
 # Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /opt/python-api
 
-# Copiamos los archivos del proyecto desde el directorio python_api
+# Copiamos los archivos del proyecto desde el directorio python-api
 COPY . /opt/python-api/
 
 # Instalamos las dependencias desde el archivo requirements.txt
