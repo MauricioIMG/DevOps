@@ -26,7 +26,10 @@ def save_non_ordered_list(lista_no_ordenada: str = Query(
 
     """
     # Retorna la lista recibida por parámetro
-    lista_no_ordenada = [int(x) for x in lista_no_ordenada.strip("[]").split(",")]
+    try:
+        lista_no_ordenada = [int(x) for x in lista_no_ordenada.strip("[]").split(",")]
+    except ValueError:
+        return {"error": "La lista debe contener solo números separados por comas."}
     # Retorna la hora actual formateada ("HHh:MM:SS")
     tiempo = datetime.now().strftime("%Hh:%M:%S")
     # Obtiene un Id único para la lista procesada
