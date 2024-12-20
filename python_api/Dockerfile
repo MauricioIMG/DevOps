@@ -5,13 +5,13 @@ FROM python:3.12.5-slim-bullseye
 WORKDIR /opt/python-api/
 
 # Copia únicamente el archivo de dependencias primero para aprovechar la caché
-COPY requirements.txt .
+COPY api/requirements.txt .
 
 # Instala las dependencias del proyecto y limpia cachés para reducir el tamaño de la imagen
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia el código fuente del proyecto al contenedor
-COPY . .
+COPY api/ .
 
 # Expone el puerto 8001 para la API
 EXPOSE 8001

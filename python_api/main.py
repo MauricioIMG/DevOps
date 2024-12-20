@@ -4,7 +4,7 @@ from fastapi import FastAPI, Query
 from datetime import datetime
 
 # librerias propias
-from mongo_setup import get_mongo_db
+from python_api.mongo_setup import get_mongo_db
 
 app = FastAPI()
 
