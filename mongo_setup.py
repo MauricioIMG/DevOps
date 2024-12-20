@@ -8,12 +8,15 @@ from pymongo.database import Database
 def create_mongo_client() -> MongoClient:
     """Crea y devuelve un cliente de MongoDB usando las variables de entorno.
     """
-    # Usa un valor por defecto si no está definido
-    mongo_host = os.getenv('MONGODB_HOST')
-    # Convierte el puerto a entero
-    mongo_port = int(os.getenv('MONGODB_PORT'))
+    mongo_host = os.getenv('MONGODB_HOST', 'localhost')
+    mongo_port = int(os.getenv('MONGODB_PORT', 27017))
 
-    return MongoClient(host=mongo_host, port=mongo_port)
+    try:
+        # Devuelve el cliente MongoDB con el host y puerto obtenidos
+        client = MongoClient(host=mongo_host, port=mongo_port)
+        return client
+    except Exception as e:
+        raise ConnectionError(f"Error al conectar con MongoDB: {e}")
 
 
 @lru_cache()
@@ -23,9 +26,12 @@ def get_mongo_db() -> Database:
     Returns:
         La base de datos 'python_app'.
     """
-    # Usa la función auxiliar para crear el cliente
+    # Usa la función auxiliar para crear el cliente de MongoDB
     client = create_mongo_client()
-    # Accede a la base de datos 'python_app'
-    mongo_db = client.python_app
 
-    return mongo_db
+    try:
+        # Accede a la base de datos 'python_app'
+        mongo_db = client.python_app
+        return mongo_db
+    except Exception as e:
+        raise ConnectionError(f"Error al acceder a la base de datos: {e}")
