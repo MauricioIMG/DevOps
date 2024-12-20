@@ -1,20 +1,19 @@
-# Usa una imagen base específica de Python para garantizar reproducibilidad
-FROM python:3.12.5-slim-bullseye
+# Usamos la imagen oficial de Python como base
+FROM python:3.12-slim
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /opt/python-api/
+# Establecemos el directorio de trabajo dentro del contenedor
+WORKDIR /app
 
-# Copia únicamente el archivo de dependencias primero para aprovechar la caché
-COPY api/requirements.txt .
+# Copiamos los archivos necesarios al contenedor
+COPY . .
 
-# Instala las dependencias del proyecto y limpia cachés para reducir el tamaño de la imagen
-RUN pip install --no-cache-dir -r requirements.txt
+# Instalamos las dependencias
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Copia el código fuente del proyecto al contenedor
-COPY api/ .
-
-# Expone el puerto 8001 para la API
+# Exponemos el puerto 8001 para acceder a la API
 EXPOSE 8001
 
-# Configura el comando de inicio para ejecutar el servidor Uvicorn
+# Comando para ejecutar la aplicación
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
+

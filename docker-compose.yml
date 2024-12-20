@@ -4,22 +4,21 @@ services:
   python-api:
     container_name: python_api # Nombre del contenedor
     build:
-      context: .  # El contexto de construcción sigue siendo el directorio raíz
-      dockerfile: api/Dockerfile  # Apunta al Dockerfile dentro de la carpeta api
+      context: ./python_api # Construye la imagen desde la carpeta python_api
     environment:
-      - MONGODB_HOST
-      - MONGODB_PORT
-      - TZ
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - TZ=UTC
     ports:
-      - "8001:8001"  # Expone puerto de API
+      - "8001:8001" # Expone puerto de API
     hostname: python-api
     volumes:
-      - ./volumes/logs:/opt/python-api/logs/api_info.logs  # Mapea los logs a la carpeta del contenedor
+      - ./volumes/logs:/app/python_api/logs # Ajuste del volumen para logs
     networks:
-      - mongodb-net  # Conectar a red de MongoDB
+      - mongodb-net # Conectar a red de MongoDB
     depends_on:
       - mongodb
-    entrypoint: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8001"]  # Ajusta la ruta del módulo main
+    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
     restart: always
     profiles:
       - api
@@ -30,10 +29,10 @@ services:
     networks:
       - mongodb-net
     ports:
-       - "27017:27017"
+       - "27017:27017" # Puerto para MongoDB
     hostname: mongodb
     volumes:
-      - mongodb-data:/data/db
+      - mongodb-data:/data/db # Volumen persistente para MongoDB
     restart: always
     profiles:
       - db

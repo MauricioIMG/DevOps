@@ -2,3 +2,10 @@
 .git
 __pycache__
 venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+venv/
+.env
