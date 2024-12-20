@@ -1,0 +1,7 @@
+# Ignoramos archivos y directorios no necesarios
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+*.git
