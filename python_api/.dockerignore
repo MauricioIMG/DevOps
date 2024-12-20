@@ -1,4 +1,4 @@
-.idea/
+../.idea/
 .git
 __pycache__
 venv
