@@ -2,13 +2,14 @@ import os
 import time
 import logging
 import requests
-from datetime import datetime
+
 
 # Configuración del logging
 logging.basicConfig(
     filename='/opt/monitor/logs/api-monitor.log',
     level=logging.INFO,
-    format='%(message)s',
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S,%f'
 )
 
 # Leer las variables de entorno
@@ -22,19 +23,19 @@ def check_health():
     """Realiza una solicitud al endpoint /healthcheck y verifica la respuesta."""
     try:
         response = requests.get(URL)
-
-        # Obtener fecha y hora actual
-        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        if response.status_code == 200 and response.text == "OK":
-            logging.info(f"{current_time} - INFO - API está operativa. Respuesta: {response.text}")
+        respuesta = response.text
+        if response.status_code == 200 and respuesta == '"OK"':
+            logging.info(
+                f"Se hizo la solicitud al endpoint {URL} y devolvió OK")
         else:
             logging.error(
-                f"{current_time} - ERROR - API no responde correctamente. Estado: {response.status_code}, Respuesta: {response.text}")
+                f"Se hizo la solicitud al endpoint {URL} y devolvió error: "
+                f"Código de estado: {response.status_code}, Respuesta: {response.text}"
+            )
 
     except requests.exceptions.RequestException as e:
-        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        logging.error(f"{current_time} - ERROR - Error al realizar la solicitud: {e}")
+        logging.error(
+            f"Se hizo la solicitud al endpoint {URL} y devolvió error: {e}")
 
 
 def main():
@@ -46,3 +47,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

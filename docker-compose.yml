@@ -1,19 +1,20 @@
 services:
   python-api:
-    container_name: python-api # Nombre del contenedor
+    container_name: python-api
+    image: python-api
     build:
-      context: ./python-api # Construye la imagen desde la carpeta python-api
+      context: ./python-api
     environment:
       - MONGODB_HOST=mongodb
       - MONGODB_PORT=27017
       - TZ=UTC
     ports:
-      - "8001:8001" # Expone puerto de API
+      - "8001:8001"
     hostname: python-api
     volumes:
-      - ./volumes/logs:/app/python-api/logs/python-api.logs # Ajuste del volumen para logs
+      - ./volumes/logs:/app/python-api/logs/python-api.logs
     networks:
-      - mongodb-net # Conectar a red de MongoDB
+      - mongodb-net
     depends_on:
       - mongodb
     entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
@@ -23,6 +24,7 @@ services:
 
   monitor-api:
     container_name: monitor-api
+    image: monitor-api
     build:
       context: ./monitor-api
     volumes:
@@ -32,6 +34,9 @@ services:
       - TARGET_CONTAINER_PORT=8001
       - CHECK_INTERVAL=5
       - TZ=America/Bogota
+    ports:
+      - "8002:8002"
+    hostname: monitor-api
     networks:
       - mongodb-net
     depends_on:
@@ -46,10 +51,10 @@ services:
     networks:
       - mongodb-net
     ports:
-       - "27017:27017" # Puerto para MongoDB
+       - "27017:27017"
     hostname: mongodb
     volumes:
-      - mongodb-data:/data/db # Volumen persistente para MongoDB
+      - mongodb-data:/data/db
     restart: always
     profiles:
       - db
