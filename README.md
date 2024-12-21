@@ -133,21 +133,3 @@ Se crea una red de MongoDb e integra al API.
    ```Bash
       docker-compose --env-file .env.demo --profile api --profile db --profile monitor up -d
       ```
-   
-3. **Comandos para probar en el navegador**
-   - **Ver la documentación de la API:**
-     ```bash
-      https://crispy-fiesta-4jgxjq9xrx49f556j-8001.app.github.dev/docs
-      ```
-   - **Verificar el estado de la API:**
-     ```bash
-      https://crispy-fiesta-4jgxjq9xrx49f556j-8001.app.github.dev/healthcheck
-      ```
-   - **Ordenar una lista:**
-     ```bash
-       https://crispy-fiesta-4jgxjq9xrx49f556j-8001.app.github.dev/lista-ordenada?lista-no-ordenada=[5,4,7,2,7,2]
-      ```
-   - **Guardar una lista no ordenada:**
-     ```bash
-      https://crispy-fiesta-4jgxjq9xrx49f556j-8001.app.github.dev/guardar-lista-no-ordenada?lista-no-ordenada=[5,4,7,2,7,2]
-      ```
