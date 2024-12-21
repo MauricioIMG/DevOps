@@ -1,10 +1,13 @@
-# librerías externas
+"""Script con métodos EndPoint de la aplicación python-api."""
+
+# External libraries
 import uuid
 from fastapi import FastAPI, Query
 from datetime import datetime
 
-# librerias propias
+# Own libraries
 from mongo_setup import get_mongo_db
+
 
 app = FastAPI()
 
@@ -47,6 +50,7 @@ def save_non_ordered_list(lista_no_ordenada: str = Query(
     respuesta = {"msg": f"La lista no ordenada fue guardada con el id: {id_unico}"}
 
     return respuesta
+
 
 @app.get("/lista-ordenada")
 def get_ordered_list(lista_no_ordenada: str = Query(

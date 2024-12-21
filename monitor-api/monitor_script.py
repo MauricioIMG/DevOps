@@ -1,10 +1,12 @@
+"""Script con métodos de la aplicación monitoreo-api"""
+
+# External libraries
 import os
 import time
 import logging
 import requests
 
 
-# Configuración del logging
 logging.basicConfig(
     filename='/opt/monitor/logs/api-monitor.log',
     level=logging.INFO,
@@ -12,7 +14,6 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S,%f'
 )
 
-# Leer las variables de entorno
 TARGET_CONTAINER_HOST = os.getenv('TARGET_CONTAINER_HOST', 'localhost')
 TARGET_CONTAINER_PORT = os.getenv('TARGET_CONTAINER_PORT', '8001')
 CHECK_INTERVAL = int(os.getenv('CHECK_INTERVAL', 5))
