@@ -124,8 +124,12 @@ Se crea una red de MongoDb e integra al API.
 
 ## Docker-Compose
 
-1. **Correr el proyecto**
+1. **Construir imagen y levantar los servicios**
    ```Bash
-      docker-compose --env-file .env.demo --profile api --profile db up -d
+      docker-compose --env-file .env.demo --profile api --profile db --profile monitor build
       ```
-       
+   
+2. **Correr el proyecto**
+   ```Bash
+      docker-compose --env-file .env.demo --profile api --profile db --profile monitor up -d
+      ```
