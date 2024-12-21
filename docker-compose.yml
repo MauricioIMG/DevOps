@@ -43,7 +43,7 @@ services:
       - python-api
     restart: always
     profiles:
-      - monitor-api
+      - monitor
 
   mongodb:
     container_name: mongodb
